@@ -1,0 +1,6 @@
+mtl Material::sky_mat
+shader legacy_tex
+mtl Material::moon_mat
+blend add
+shader legacy_tex
+depthwrite false
