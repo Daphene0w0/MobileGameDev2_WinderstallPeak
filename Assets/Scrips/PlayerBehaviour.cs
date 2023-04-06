@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerBehaviour : MonoBehaviour
 {
 	public GameObject explosion;
-	public float waitTime = 1.0f;
+	public float waitTime = 2f;
 
 
 	//For Movement
@@ -152,7 +152,6 @@ public class PlayerBehaviour : MonoBehaviour
             Invoke("ResetGame", waitTime);
         }
     }
-
 
     //Reset level function on death
     public void ResetGame()

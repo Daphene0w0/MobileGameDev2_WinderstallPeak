@@ -18,24 +18,19 @@ public class CameraFollower : MonoBehaviour
 		transform.position = lookAt.position + offset;
 	}
 
-
-    private void Update()
-    {
-
-        if (lookAt == null)
-        {
-            Invoke("RestartScene", waitTime);
-            //playerBehaviour.Invoke("ResetGame", playerBehaviour.waitTime);
-        }
-
-    }
-
     private void FixedUpdate()
 	{
-
-        Vector3 desiredPosition = lookAt.position + offset;
-        //desiredPosition.x = 0;
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime);
+        if (lookAt != null)
+        {
+            Vector3 desiredPosition = lookAt.position + offset;
+            //desiredPosition.x = 0;
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime);
+            
+        }
+        else
+        {
+            Invoke("RestartScene", waitTime);
+        }
 
 
 	}
