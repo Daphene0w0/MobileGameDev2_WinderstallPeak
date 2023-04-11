@@ -13,6 +13,9 @@ public class PlayerBehaviour : MonoBehaviour
 	//For Movement
 	private CharacterController controller;
 
+	private Vector3 startTouchPosition;
+	private Vector3 endTouchPosition;
+
 	private float verticalVelocity; //how fast the character switches lanes
 
 	public float speed = 100.0f; //the speed of the character
@@ -68,16 +71,26 @@ public class PlayerBehaviour : MonoBehaviour
 		//Points overtime
 		Score += Time.deltaTime;
 
-		//gets player input to move left or right
-		if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-		{
-			MoveRight(false);
-		}
+		//detect player touch
+		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+			startTouchPosition = Input.GetTouch(0).position;
+        }
 
-		if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
 		{
-			MoveRight(true);
+			//gets player input to move left or right
+			if (endTouchPosition.x > startTouchPosition.x)
+			{
+				MoveRight(false);
+			}
+
+			if (endTouchPosition.x < startTouchPosition.x)
+			{
+				MoveRight(true);
+			}
 		}
+		
 
 		//Calculate where we should be in future
 		Vector3 targetPosition = transform.position.z * Vector3.forward;
@@ -108,7 +121,7 @@ public class PlayerBehaviour : MonoBehaviour
 		//this ensures player can only jump once and when they're grounded
 		if (controller.collisionFlags == CollisionFlags.Below)
         {
-			if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
+			if (endTouchPosition.y > startTouchPosition.y)
 			{
 				Jump();
 			}
