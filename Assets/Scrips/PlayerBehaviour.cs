@@ -13,9 +13,6 @@ public class PlayerBehaviour : MonoBehaviour
 	//For Movement
 	private CharacterController controller;
 
-	private Vector3 startTouchPosition;
-	private Vector3 endTouchPosition;
-
 	private float verticalVelocity; //how fast the character switches lanes
 
 	public float speed = 100.0f; //the speed of the character
@@ -24,7 +21,14 @@ public class PlayerBehaviour : MonoBehaviour
 	private int desiredLane = 1; //0 = Left, 1 = Middle, 2 = Right
 
 	//This is what separates the lanes, distancing each other from one another
-	private const float Lane_Distance = 3.0f;
+	private const float Lane_Distance = 3.3f;
+
+
+	//variables for swiping
+	public float minSwipeDistance = 0.25f; //how far player need to swipe to execute an action
+	private float minSwipeDistancePixels; //holds value above and converts to pixels
+
+	private Vector2 touchStart;
 
 
 	//For Jumping
@@ -63,6 +67,8 @@ public class PlayerBehaviour : MonoBehaviour
 		controller = GetComponent<CharacterController>(); //This is required to use Character Controller related codes
 
 		Score = 0;
+
+		minSwipeDistancePixels = minSwipeDistance * Screen.dpi;
 	}
 
 
@@ -72,24 +78,33 @@ public class PlayerBehaviour : MonoBehaviour
 		Score += Time.deltaTime;
 
 		//detect player touch
-		if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+		if (Input.touchCount >0)
         {
-			startTouchPosition = Input.GetTouch(0).position;
-        }
+			Touch touch = Input.touches[0];
 
-		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
-		{
-			//gets player input to move left or right
-			if (endTouchPosition.x > startTouchPosition.x)
+			if (touch.phase == TouchPhase.Began)
 			{
-				MoveRight(false);
+				touchStart = touch.position;
 			}
-
-			if (endTouchPosition.x < startTouchPosition.x)
+			else if (touch.phase == TouchPhase.Ended)
 			{
-				MoveRight(true);
+				Vector2 touchEnd = touch.position;
+
+				float x = touchEnd.x - touchStart.x;
+
+				//gets player input to move left or right
+				if (x < 0)
+				{
+					MoveRight(false);
+				}
+
+				if (x > 0)
+				{
+					MoveRight(true);
+				}
 			}
 		}
+		
 		
 
 		//Calculate where we should be in future
@@ -120,10 +135,28 @@ public class PlayerBehaviour : MonoBehaviour
 
 		//this ensures player can only jump once and when they're grounded
 		if (controller.collisionFlags == CollisionFlags.Below)
-        {
-			if (endTouchPosition.y > startTouchPosition.y)
+		{
+			if (Input.touchCount > 0)
 			{
-				Jump();
+				Touch touch = Input.touches[0];
+
+				if (touch.phase == TouchPhase.Began)
+				{
+					touchStart = touch.position;
+				}
+				else if (touch.phase == TouchPhase.Ended)
+				{
+					Vector2 touchEnd = touch.position;
+
+					float y = touchEnd.y - touchStart.y;
+
+					//gets player input to move left or right
+					if (y > 0)
+					{
+						Jump();
+					}
+
+				}
 			}
 		}
 
