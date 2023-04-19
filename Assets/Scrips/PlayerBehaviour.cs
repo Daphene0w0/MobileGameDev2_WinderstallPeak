@@ -17,6 +17,8 @@ public class PlayerBehaviour : MonoBehaviour
 
 	public float speed = 100.0f; //the speed of the character
 
+	public float laneSpeed = 10f; //speed  to move between lanes
+
 	//This is to set the lanes
 	private int desiredLane = 1; //0 = Left, 1 = Middle, 2 = Right
 
@@ -37,36 +39,36 @@ public class PlayerBehaviour : MonoBehaviour
 	public float Gravity = -9.81f;
 
 
-	[Header("Object References")]
-	public Text scoreText;
-	private float score = 0;
-	public float Score
-	{
- 		get { return score; }
-		
-		set
- 		{
- 			score = value;
- 			// Check if scoreText has been assigned
- 			if (scoreText == null)
- 			{
- 				Debug.LogError("Score Text is not set. " +
- 				"Please go to the Inspector and assign it");
- 				// If not assigned, don't try to update it.
- 				return;
- 			}
- 		// Update the text to display the whole number portion of the score
- 		scoreText.text = string.Format("{0:0}", score);
- 	}
-}
+    [Header("Object References")]
+    public Text scoreText;
+    private float score = 0;
+    public float Score
+    {
+        get { return score; }
+
+        set
+        {
+            score = value;
+            // Check if scoreText has been assigned
+            if (scoreText == null)
+            {
+                Debug.LogError("Score Text is not set. " +
+                "Please go to the Inspector and assign it");
+                // If not assigned, don't try to update it.
+                return;
+            }
+            // Update the text to display the whole number portion of the score
+            scoreText.text = string.Format("{0:0}", score);
+        }
+    }
 
 
 
-	private void Start()
+    private void Start()
 	{
 		controller = GetComponent<CharacterController>(); //This is required to use Character Controller related codes
 
-		Score = 0;
+		//Score = 0;
 
 		minSwipeDistancePixels = minSwipeDistance * Screen.dpi;
 	}
@@ -74,11 +76,11 @@ public class PlayerBehaviour : MonoBehaviour
 
 	private void Update()
 	{
-		//Points overtime
-		Score += Time.deltaTime;
+        //Points overtime
+        Score += Time.deltaTime;
 
-		//detect player touch
-		if (Input.touchCount >0)
+        //detect player touch
+        if (Input.touchCount >0)
         {
 			Touch touch = Input.touches[0];
 
@@ -122,7 +124,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 
 		Vector3 moveVector = Vector3.zero;
-		moveVector.x = (targetPosition - transform.position).normalized.x * speed;
+		moveVector.x = (targetPosition - transform.position).normalized.x * speed * laneSpeed;
 		moveVector.y = -0.1f;
 		moveVector.z = speed;
 

@@ -9,6 +9,7 @@ public class ObstacleBehaviour : MonoBehaviour
     public float waitTime = 1.0f;
 
     public GameObject explosion;
+
     void Start()
     {
 
