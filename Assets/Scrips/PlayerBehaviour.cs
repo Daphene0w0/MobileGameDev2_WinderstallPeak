@@ -9,6 +9,7 @@ public class PlayerBehaviour : MonoBehaviour
 	public GameObject explosion;
 	public float waitTime = 2f;
 
+	public GameObject gameOverMenu;
 
 	//For Movement
 	private CharacterController controller;
