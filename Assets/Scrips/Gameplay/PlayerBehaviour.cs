@@ -14,8 +14,6 @@ public class PlayerBehaviour : MonoBehaviour
 	//For Movement
 	private CharacterController controller;
 
-	private float verticalVelocity; //how fast the character switches lanes
-
 	public float speed = 100.0f; //the speed of the character
 
 	public float laneSpeed = 10f; //speed  to move between lanes
@@ -123,18 +121,18 @@ public class PlayerBehaviour : MonoBehaviour
 		}
 
 
-
-		Vector3 moveVector = Vector3.zero;
-		moveVector.x = (targetPosition - transform.position).normalized.x * speed * laneSpeed;
-		moveVector.y = -0.1f;
-		moveVector.z = speed;
-
-
-		controller.Move(moveVector * Time.deltaTime);
+		// To move. Without these, character won't move
+        Vector3 moveVector = Vector3.zero;
+        moveVector.x = (targetPosition - transform.position).normalized.x * speed * laneSpeed;
+        moveVector.y = -0.1f;
+        moveVector.z = speed;
 
 
-		//To Jump
-		direction.y += Gravity * Time.deltaTime;
+        controller.Move(moveVector * Time.deltaTime);
+
+
+        //To go back down after jumping
+        direction.y += Gravity * Time.deltaTime;
 
 		//this ensures player can only jump once and when they're grounded
 		if (controller.collisionFlags == CollisionFlags.Below)
@@ -177,12 +175,12 @@ public class PlayerBehaviour : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		controller.Move(direction * Time.deltaTime);
-	}
+        controller.Move(direction * Time.deltaTime); //This affects the Jump mechanics
+    }
 
 
-	//jump function
-	private void Jump()
+    //jump function
+    private void Jump()
 	{
 		direction.y = jumpForce;
     }
