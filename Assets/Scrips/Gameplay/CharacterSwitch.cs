@@ -4,51 +4,27 @@ using UnityEngine;
 
 public class CharacterSwitch : MonoBehaviour
 {
+    
     public GameObject vanillaPrefab;
     public GameObject chocolatePrefab;
     public GameObject strawberryPrefab;
 
-    ShopManager isUsingVanilla;
-    ShopManager isUsingChocolate;
-    ShopManager isUsingStrawberry;
-
-
     // Update is called once per frame
     void Start()
     {
-        if(isUsingVanilla == true)
+        if(PlayerPrefs.GetInt("SnowmanFlavour") == 1)
         {
-            VanillaPlay();
+            Instantiate(vanillaPrefab, transform.position, Quaternion.identity);
         }
-        else if (isUsingChocolate == true)
+        else if (PlayerPrefs.GetInt("SnowmanFlavour") == 2)
         {
-            ChocoPlay();
+            Instantiate(chocolatePrefab, transform.position, Quaternion.identity);
         }
-        else if (isUsingStrawberry == true)
+        else if (PlayerPrefs.GetInt("SnowmanFlavour") == 3)
         {
-            StrawberryPlay();
+            Instantiate(strawberryPrefab, transform.position, Quaternion.identity);
         }
 
     }
 
-    public void VanillaPlay()
-    {
-        vanillaPrefab.SetActive(true);
-        chocolatePrefab.SetActive(false);
-        strawberryPrefab.SetActive(false);
-    }
-
-    public void ChocoPlay()
-    {
-        strawberryPrefab.SetActive(false);
-        vanillaPrefab.SetActive(false);
-        chocolatePrefab.SetActive(true);
-    }
-
-    public void StrawberryPlay()
-    {
-        vanillaPrefab.SetActive(false);
-        chocolatePrefab.SetActive(false);
-        strawberryPrefab.SetActive(true);
-    }
 }

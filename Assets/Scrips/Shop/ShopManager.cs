@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShopManager : MonoBehaviour
 {
@@ -40,44 +41,48 @@ public class ShopManager : MonoBehaviour
         minShopSwipeDistancePixels = minShopSwipeDistance * Screen.dpi;
 
         currentSkin = 2;
+
+       
     }
 
 
     private void Update()
     {
-        //detect player touch
-        if (Input.touchCount > 0)
+
+
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            Touch shoptouch = Input.touches[0];
-
-            if (shoptouch.phase == TouchPhase.Began)
+            //detect player touch
+            if (Input.touchCount > 0)
             {
-                shopTouchStart = shoptouch.position;
-            }
-            else if (shoptouch.phase == TouchPhase.Ended)
-            {
-                Vector2 touchEnd = shoptouch.position;
+                Touch shoptouch = Input.touches[0];
 
-                float x = touchEnd.x - shopTouchStart.x;
-
-                if (x < 0)
+                if (shoptouch.phase == TouchPhase.Began)
                 {
-                    NextSnowmanLeft();
+                    shopTouchStart = shoptouch.position;
                 }
-
-                if (x > 0)
+                else if (shoptouch.phase == TouchPhase.Ended)
                 {
-                    NextSnowmanRight();
-                }
+                    Vector2 touchEnd = shoptouch.position;
 
+                    float x = touchEnd.x - shopTouchStart.x;
+
+                    if (x < 0)
+                    {
+                        NextSnowmanLeft();
+                    }
+
+                    if (x > 0)
+                    {
+                        NextSnowmanRight();
+                    }
+
+                }
             }
+
+            switchSnowman();
         }
 
-        switchSnowman();
-
-        
-        
-       
     }
 
 
@@ -98,6 +103,7 @@ public class ShopManager : MonoBehaviour
         switch (currentSkin)
         {
             default:
+        
                 currentSkin = 2;
                 break;
 
@@ -125,25 +131,19 @@ public class ShopManager : MonoBehaviour
 
     public void usingVanilla()
     {
-        isUsingVanilla = true;
-        isUsingChocolate = false;
-        isUsingStrawberry = false;
+        PlayerPrefs.SetInt("SnowmanFlavour", 1);
         print("usingVanilla");
     }
 
     public void usingChocolate()
     {
-        isUsingChocolate = true;
-        isUsingStrawberry = false;
-        isUsingVanilla = false;
+        PlayerPrefs.SetInt("SnowmanFlavour", 2);
         print("usingChoco");
     }
 
     public void usingStrawberry()
     {
-        isUsingStrawberry = true;
-        isUsingVanilla = false;
-        isUsingChocolate = false;
+        PlayerPrefs.SetInt("SnowmanFlavour", 3);
         print("usingStrawberry") ;
     }
 }

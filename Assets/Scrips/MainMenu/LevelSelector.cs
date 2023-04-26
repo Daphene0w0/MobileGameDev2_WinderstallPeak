@@ -28,7 +28,7 @@ public class LevelSelector : MonoBehaviour
     public void loadMainMenu()
     {
         
-        //StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex - 1));
+        
         StartCoroutine(LoadLevel(0));
     }
 

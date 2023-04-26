@@ -21,37 +21,7 @@ public class ObstacleBehaviour : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        //if (collision.gameObject.CompareTag("Player"))
-        //{
-        //    Debug.Log("Player Died");
-        //    //Destroy the player
-        //    Destroy(collision.gameObject);
-        //    var particles = Instantiate(explosion, new Vector3(0, 0, -2) + transform.position, Quaternion.identity);
-        //    //Call the function ResetGame after waitTime has passed
-        //    Invoke("ResetGame", waitTime);
-        //}
-
-        //First check if we collide with the player
-        //if (collision.gameObject.CompareTag("Player"))
-        //{
-        //    Debug.Log("Player Died");
-        //    //Destroy the player
-        //    Destroy(collision.gameObject);
-        //    var particles = Instantiate(explosion, new Vector3(0, 0, -2) + transform.position, Quaternion.identity);
-        //    //Call the function ResetGame after waitTime has passed
-        //    Invoke("ResetGame", waitTime);
-
-        //}
-    }
-
-    private void ResetGame()
-    {
-        //Restart the current level
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
+ 
 
     /// If the object is tapped, we spawn an explosion and
     /// destroy this object

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerBehaviour : MonoBehaviour
 {
 	public GameObject explosion;
 	public float waitTime = 2f;
-
-	public GameObject gameOverMenu;
 
 	//For Movement
 	private CharacterController controller;
@@ -37,46 +36,20 @@ public class PlayerBehaviour : MonoBehaviour
 	public float jumpForce;
 	public float Gravity = -9.81f;
 
-
-    [Header("Object References")]
-    public Text scoreText;
-    private float score = 0;
-    public float Score
-    {
-        get { return score; }
-
-        set
-        {
-            score = value;
-            // Check if scoreText has been assigned
-            if (scoreText == null)
-            {
-                Debug.LogError("Score Text is not set. " +
-                "Please go to the Inspector and assign it");
-                // If not assigned, don't try to update it.
-                return;
-            }
-            // Update the text to display the whole number portion of the score
-            scoreText.text = string.Format("{0:0}", score);
-        }
-    }
-
-
-
+    
     private void Start()
 	{
 		controller = GetComponent<CharacterController>(); //This is required to use Character Controller related codes
 
-		//Score = 0;
-
 		minSwipeDistancePixels = minSwipeDistance * Screen.dpi;
+
+		PlayerPrefs.SetInt("PlayerIsDead", 0);
 	}
 
 
 	private void Update()
 	{
-        //Points overtime
-        Score += Time.deltaTime;
+        
 
         //detect player touch
         if (Input.touchCount >0)
@@ -194,16 +167,21 @@ public class PlayerBehaviour : MonoBehaviour
             Debug.Log("Player Died");
             //Destroy the player
             Destroy(this.gameObject);
+
+			PlayerPrefs.SetInt("PlayerIsDead", 1);
             var particles = Instantiate(explosion, new Vector3(0, 0, -2) + transform.position, Quaternion.identity);
             //Call the function ResetGame after waitTime has passed
-            Invoke("ResetGame", waitTime);
+            //Invoke("LoadGameOverMenu", waitTime);
         }
     }
 
     //Reset level function on death
-    public void ResetGame()
-	{
-		//Restart the current level
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-	}
+ //   public void ResetGame()
+	//{
+	//	//Restart the current level
+	//	SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	//}
+
+
+
 }
