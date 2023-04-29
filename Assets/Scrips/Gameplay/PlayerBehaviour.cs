@@ -8,7 +8,7 @@ using TMPro;
 public class PlayerBehaviour : MonoBehaviour
 {
 	public GameObject explosion;
-	public float waitTime = 2f;
+	//public float waitTime = 2f;
 
 	//For Movement
 	private CharacterController controller;
@@ -36,7 +36,11 @@ public class PlayerBehaviour : MonoBehaviour
 	public float jumpForce;
 	public float Gravity = -9.81f;
 
-    
+	//For Sound Effects
+	[SerializeField] AudioSource JumpSFX;
+	[SerializeField] AudioSource DeathSFX;
+	[SerializeField] AudioSource SlideSFX;
+
     private void Start()
 	{
 		controller = GetComponent<CharacterController>(); //This is required to use Character Controller related codes
@@ -141,6 +145,7 @@ public class PlayerBehaviour : MonoBehaviour
 	//moving lanes function and make movements smooth
 	private void MoveRight(bool goingRight)
 	{
+		SlideSFX.Play();
 		desiredLane += (goingRight) ? 1 : -1;
 		desiredLane = Mathf.Clamp(desiredLane, 0, 2);
 	}
@@ -155,6 +160,7 @@ public class PlayerBehaviour : MonoBehaviour
     //jump function
     private void Jump()
 	{
+		JumpSFX.Play();
 		direction.y = jumpForce;
     }
 
@@ -164,24 +170,16 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (hit.transform.tag == "Obstacle")
         {
+			DeathSFX.Play();
+			PlayerPrefs.SetInt("PlayerIsDead", 1);
             Debug.Log("Player Died");
             //Destroy the player
             Destroy(this.gameObject);
-
-			PlayerPrefs.SetInt("PlayerIsDead", 1);
             var particles = Instantiate(explosion, new Vector3(0, 0, -2) + transform.position, Quaternion.identity);
             //Call the function ResetGame after waitTime has passed
             //Invoke("LoadGameOverMenu", waitTime);
         }
+			
     }
-
-    //Reset level function on death
- //   public void ResetGame()
-	//{
-	//	//Restart the current level
-	//	SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-	//}
-
-
 
 }

@@ -21,12 +21,10 @@ public class GameOverMenu : MonoBehaviour
 
         if (PlayerPrefs.GetInt("PlayerIsDead") == 1)
         {
-            //gameOverPanel.SetActive(true);
-            //Time.timeScale = 0;
-
+            
             StartCoroutine(LoadGameOverMenu(waitTime));
-            //Invoke("LoadGameOverMenu", waitTime);
 
+            
         }
     }
 
@@ -34,17 +32,19 @@ public class GameOverMenu : MonoBehaviour
     {
 
         yield return new WaitForSeconds(waitTime);
-        
+       
+        Time.timeScale = 0;
+
         gameOverPanel.SetActive(true);
-        PlayerPrefs.SetInt("PlayerIsDead", 0);
-        //Time.timeScale = 0;
+
+        yield return new WaitForSeconds(1);
 
     }
 
     public void Restart()
     {
+        PlayerPrefs.SetInt("PlayerIsDead", 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
-        PlayerPrefs.SetInt("PlayerIsDead", 0);
     }
 }

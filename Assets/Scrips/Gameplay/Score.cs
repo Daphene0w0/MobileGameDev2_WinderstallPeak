@@ -5,20 +5,24 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour
 {
-    //PlayerBehaviour playerBehaviour;
 
     public Text scoreText;
-    //public TMP_Text highScoreText;
+    public Text highScoreText;
+    public Text currentScoreText;
 
     public float score = 0f;
-    //public int highScore = 0;
     public int scoreDivide = 2;
+
+    public float currentScore;
+    public float highScore;
 
     // Start is called before the first frame update
     void Start()
     {
         scoreText.text = score.ToString();
-        //highScoreText.text = highScore.ToString();
+        currentScoreText.text = currentScore.ToString();
+
+        highScoreText.text = PlayerPrefs.GetFloat("HighScore",0).ToString("#");
     }
 
     // Update is called once per frame
@@ -29,5 +33,24 @@ public class Score : MonoBehaviour
             score += Time.deltaTime * 3f;
             scoreText.text = score.ToString("#");
         }
+
+        if (PlayerPrefs.GetInt("PlayerIsDead") == 1)
+        {
+            if (score > PlayerPrefs.GetFloat("HighScore", 0))
+            {
+                PlayerPrefs.SetFloat("HighScore", score);
+                highScoreText.text = score.ToString("#");
+            }
+        }
+
+        if (PlayerPrefs.GetInt("PlayerIsDead") == 1)
+        {
+            PlayerPrefs.SetFloat("currentScore", score);
+            currentScore = score;
+            currentScoreText.text = score.ToString("#");
+
+        }
+
     }
+
 }

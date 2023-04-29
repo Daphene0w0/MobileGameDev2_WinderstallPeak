@@ -7,18 +7,9 @@ public class FinishLine : MonoBehaviour
 {
     public GameObject LevelCompeleteUI;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] AudioSource levelCompleteSFX;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         CompleteLevel();
@@ -26,6 +17,7 @@ public class FinishLine : MonoBehaviour
 
     private void CompleteLevel()
     {
+        levelCompleteSFX.Play();
         LevelCompeleteUI.SetActive(true);
     }
 
