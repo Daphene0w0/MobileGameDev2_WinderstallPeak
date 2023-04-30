@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 5320165075835079635, guid: a53130120588231468e3a5ba54024ec7,
     type: 3}
-  speed: 25
+  speed: 45
   laneSpeed: 5
   minSwipeDistance: 0.25
   jumpForce: 7
@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookAt: {fileID: 905282513433332723}
-  offset: {x: 0, y: 3, z: -12}
+  offset: {x: 0, y: 5, z: 2}
 --- !u!82 &1104240302326296910
 AudioSource:
   m_ObjectHideFlags: 0
@@ -602,7 +602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8946668382890529471}
   m_Layer: 0
-  m_Name: Player v
+  m_Name: Player2 v
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

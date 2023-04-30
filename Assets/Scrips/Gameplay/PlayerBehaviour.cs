@@ -41,7 +41,7 @@ public class PlayerBehaviour : MonoBehaviour
 	[SerializeField] AudioSource DeathSFX;
 	[SerializeField] AudioSource SlideSFX;
 
-    private void Start()
+	private void Start()
 	{
 		controller = GetComponent<CharacterController>(); //This is required to use Character Controller related codes
 
@@ -53,11 +53,10 @@ public class PlayerBehaviour : MonoBehaviour
 
 	private void Update()
 	{
-        
 
-        //detect player touch
-        if (Input.touchCount >0)
-        {
+		//detect player touch
+		if (Input.touchCount > 0)
+		{
 			Touch touch = Input.touches[0];
 
 			if (touch.phase == TouchPhase.Began)
@@ -82,8 +81,8 @@ public class PlayerBehaviour : MonoBehaviour
 				}
 			}
 		}
-		
-		
+
+
 
 		//Calculate where we should be in future
 		Vector3 targetPosition = transform.position.z * Vector3.forward;
@@ -99,17 +98,17 @@ public class PlayerBehaviour : MonoBehaviour
 
 
 		// To move. Without these, character won't move
-        Vector3 moveVector = Vector3.zero;
-        moveVector.x = (targetPosition - transform.position).normalized.x * speed * laneSpeed;
-        moveVector.y = -0.1f;
-        moveVector.z = speed;
+		Vector3 moveVector = Vector3.zero;
+		moveVector.x = (targetPosition - transform.position).normalized.x * speed * laneSpeed;
+		moveVector.y = -0.1f;
+		moveVector.z = speed;
 
 
-        controller.Move(moveVector * Time.deltaTime);
+		controller.Move(moveVector * Time.deltaTime);
 
 
-        //To go back down after jumping
-        direction.y += Gravity * Time.deltaTime;
+		//To go back down after jumping
+		direction.y += Gravity * Time.deltaTime;
 
 		//this ensures player can only jump once and when they're grounded
 		if (controller.collisionFlags == CollisionFlags.Below)
@@ -138,7 +137,7 @@ public class PlayerBehaviour : MonoBehaviour
 			}
 		}
 
-		
+
 	}
 
 
@@ -146,40 +145,51 @@ public class PlayerBehaviour : MonoBehaviour
 	private void MoveRight(bool goingRight)
 	{
 		SlideSFX.Play();
-		desiredLane += (goingRight) ? 1 : -1;
-		desiredLane = Mathf.Clamp(desiredLane, 0, 2);
+
+        desiredLane += (goingRight) ? 1 : -1;
+
+
+        desiredLane = Mathf.Clamp(desiredLane, 0, 2);
 	}
+	//private void MoveLeft(bool goingRight)
+	//{
+	//	SlideSFX.Play();
+
+ //       desiredLane += (goingRight) ? 1 : -1;
+       
+	//	desiredLane = Mathf.Clamp(desiredLane, 0, 2);
+	//}
 
 
 	private void FixedUpdate()
 	{
-        controller.Move(direction * Time.deltaTime); //This affects the Jump mechanics
-    }
+		controller.Move(direction * Time.deltaTime); //This affects the Jump mechanics
+	}
 
 
-    //jump function
-    private void Jump()
+	//jump function
+	private void Jump()
 	{
 		JumpSFX.Play();
 		direction.y = jumpForce;
-    }
+	}
 
 
-    //if player hits an obstacle what would happen
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.transform.tag == "Obstacle")
-        {
+	//if player hits an obstacle what would happen
+	private void OnControllerColliderHit(ControllerColliderHit hit)
+	{
+		if (hit.transform.tag == "Obstacle")
+		{
 			DeathSFX.Play();
 			PlayerPrefs.SetInt("PlayerIsDead", 1);
-            Debug.Log("Player Died");
-            //Destroy the player
-            Destroy(this.gameObject);
-            var particles = Instantiate(explosion, new Vector3(0, 0, -2) + transform.position, Quaternion.identity);
-            //Call the function ResetGame after waitTime has passed
-            //Invoke("LoadGameOverMenu", waitTime);
-        }
-			
-    }
+			Debug.Log("Player Died");
+			//Destroy the player
+			Destroy(this.gameObject);
+			var particles = Instantiate(explosion, new Vector3(0, 0, -2) + transform.position, Quaternion.identity);
+			//Call the function ResetGame after waitTime has passed
+			//Invoke("LoadGameOverMenu", waitTime);
+		}
+
+	}
 
 }

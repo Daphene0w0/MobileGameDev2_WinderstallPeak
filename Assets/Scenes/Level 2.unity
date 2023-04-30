@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
-  m_FogMode: 2
-  m_FogDensity: 0.01
+  m_FogColor: {r: 0.08235294, g: 0.17254902, b: 0.25490198, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.03
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -26,10 +26,10 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 022e71752654d3f4fa0cbe71b312ad20, type: 2}
-  m_HaloStrength: 0.3
+  m_SkyboxMaterial: {fileID: 2100000, guid: 52fcefd712182d743a781fde12426775, type: 2}
+  m_HaloStrength: 0.4
   m_FlareStrength: 1
-  m_FlareFadeSpeed: 5
+  m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.66456497, g: 0.6124625, b: 0.6203083, a: 1}
+  m_IndirectSpecularColor: {r: 0.01440346, g: 0.05788061, b: 0.10578639, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1930,7 +1930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2457,6 +2457,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Volume
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7980350994177422961, guid: 359d383330b86ea478ab40eac912ec7a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7980350994177422966, guid: 359d383330b86ea478ab40eac912ec7a,
         type: 3}
@@ -3697,11 +3702,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c56a2dba39358c46b91f404c6b5f0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vanillaPrefab: {fileID: 7794877339369908810, guid: de9d415cb2f274c4e8d6177aa27362d5,
+  vanillaPrefab: {fileID: 7794877339369908810, guid: 87c095a92907f774d92ddb20b8b82d0e,
     type: 3}
-  chocolatePrefab: {fileID: 1967497633768640344, guid: 81f8809b5d7adc747b78789826d39d20,
+  chocolatePrefab: {fileID: 1967497633768640344, guid: 03b6b7880ed519746a210c237d4e04f8,
     type: 3}
-  strawberryPrefab: {fileID: 9007925793007464830, guid: 9aff7d9847767d44d870c1ee26d7dcbb,
+  strawberryPrefab: {fileID: 9007925793007464830, guid: 320b5da87377ff8498fa013555db81ab,
     type: 3}
 --- !u!4 &1939892202
 Transform:
@@ -3711,7 +3716,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939892200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: -24.62}
+  m_LocalPosition: {x: 0, y: 4, z: -55.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3848,8 +3853,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7440554675661583748}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 0.4, z: 15}
-  m_LocalScale: {x: 10, y: 0.5, z: 30}
+  m_LocalPosition: {x: 10, y: 0.4, z: -10}
+  m_LocalScale: {x: 10, y: 0.5, z: 80}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6637306541551868871}
@@ -3969,8 +3974,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6961031725126275691}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10, y: 0.4, z: 15}
-  m_LocalScale: {x: 10, y: 0.5, z: 30}
+  m_LocalPosition: {x: -10, y: 0.4, z: -10}
+  m_LocalScale: {x: 10, y: 0.5, z: 80}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6637306541551868871}
@@ -4250,8 +4255,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382052504693209812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 15}
-  m_LocalScale: {x: 10, y: 0.5, z: 30}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 10, y: 0.5, z: 80}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6637306541551868871}
