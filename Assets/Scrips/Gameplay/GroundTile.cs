@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class GroundTile : MonoBehaviour
 {
     GroundSpawner groundSpawner;
@@ -17,7 +16,6 @@ public class GroundTile : MonoBehaviour
     void Start()
     {
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
-        
     }
 
     private void OnTriggerExit(Collider other)
@@ -25,7 +23,6 @@ public class GroundTile : MonoBehaviour
         groundSpawner.SpawnTile();
         Destroy(gameObject, 2);
     }
-
 
     // Update is called once per frame
     void Update()
@@ -42,7 +39,6 @@ public class GroundTile : MonoBehaviour
             SpawnObstacles();
 
         }
-
     }
 
     void SpawnObstacles()

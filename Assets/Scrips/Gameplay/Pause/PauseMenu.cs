@@ -10,7 +10,6 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject pauseButton;
 
-
     public void Resume()
     {
         pauseButton.SetActive(true);
@@ -37,6 +36,5 @@ public class PauseMenu : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
-        
     }
 }

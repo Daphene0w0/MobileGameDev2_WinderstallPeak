@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class GroundSpawner : MonoBehaviour
 {
-    //public GameObject groundTile;
     Vector3 nextSpawnPoint;
 
     public GameObject[] GroundTileArrayPrefab;
@@ -19,7 +18,6 @@ public class GroundSpawner : MonoBehaviour
     {
         for (int i = 0; i < 15; i++)
         {
-            
             SpawnTile();
         }
 

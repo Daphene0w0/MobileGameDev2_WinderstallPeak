@@ -21,22 +21,15 @@ public class GameOverMenu : MonoBehaviour
 
         if (PlayerPrefs.GetInt("PlayerIsDead") == 1)
         {
-            
             StartCoroutine(LoadGameOverMenu(waitTime));
-
-            
         }
     }
 
     IEnumerator LoadGameOverMenu(int waitTime)
     {
-
         yield return new WaitForSeconds(waitTime);
-       
         Time.timeScale = 0;
-
         gameOverPanel.SetActive(true);
-
         yield return new WaitForSeconds(1);
 
     }

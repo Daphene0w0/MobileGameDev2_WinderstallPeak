@@ -14,14 +14,11 @@ public class ShopManager : MonoBehaviour
     // To direct to the specific object intended to rotate, just in case.
     public GameObject SnowmanDisplay;
 
-
     // Original rotation position and Max rotation position
-    // 360/3 = 120
-    // 0 = original, 120 = chocolate, 240 = strawberry, 360 == 0
+
     Quaternion firstSkin = Quaternion.Euler (0, 0, 0); // default skin
     Quaternion secondSkin = Quaternion.Euler(0, 120, 0); // choco skin
     Quaternion thirdSkin = Quaternion.Euler(0, 240, 0); // strawberry skin
-
 
     public int currentSkin;
 
@@ -29,7 +26,6 @@ public class ShopManager : MonoBehaviour
 
     // To use with Lerp for smooth transition when changing characters.
     public float shopRotateDistance = 120.0f;
-
 
     //boolean for skins for gameplay reference
     public bool isUsingVanilla = true;
@@ -39,17 +35,12 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         minShopSwipeDistancePixels = minShopSwipeDistance * Screen.dpi;
-
         currentSkin = 2;
-
-       
     }
 
 
     private void Update()
     {
-
-
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             //detect player touch
@@ -76,15 +67,11 @@ public class ShopManager : MonoBehaviour
                     {
                         NextSnowmanRight();
                     }
-
                 }
             }
-
             switchSnowman();
         }
-
     }
-
 
     // swipe directions and switching skins
     void NextSnowmanLeft()
@@ -96,7 +83,6 @@ public class ShopManager : MonoBehaviour
     {
         currentSkin -= 1;
     }
-
 
     void switchSnowman()
     {

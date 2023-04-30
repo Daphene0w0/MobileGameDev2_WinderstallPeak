@@ -11,8 +11,6 @@ public class CameraFollower : MonoBehaviour
 
 	PlayerBehaviour playerBehaviour;
 
-	private float waitTime = 2f;
-
 	private void Start()
 	{
 		transform.position = lookAt.position + offset;
@@ -27,16 +25,7 @@ public class CameraFollower : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime);
             
         }
-        else
-        {
-            Invoke("RestartScene", waitTime);
-        }
-
 
 	}
 
-	private void RestartScene()
-    {
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-	}
 }

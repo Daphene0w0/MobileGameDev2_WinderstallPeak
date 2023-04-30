@@ -85,7 +85,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 
 		//Calculate where we should be in future
-		Vector3 targetPosition = transform.position.z * Vector3.forward;
+		Vector3 targetPosition = transform.position.z * Vector3.forward + transform.position.y * transform.up;
 
 		if (desiredLane == 0)
 		{
@@ -95,6 +95,9 @@ public class PlayerBehaviour : MonoBehaviour
 		{
 			targetPosition += Vector3.right * Lane_Distance;
 		}
+		transform.position = Vector3.Lerp(transform.position, targetPosition, 80* Time.deltaTime);
+
+		////We Stop Here XX
 
 
 		// To move. Without these, character won't move
@@ -146,19 +149,11 @@ public class PlayerBehaviour : MonoBehaviour
 	{
 		SlideSFX.Play();
 
-        desiredLane += (goingRight) ? 1 : -1;
+		desiredLane += (goingRight) ? 1 : -1;
 
-
-        desiredLane = Mathf.Clamp(desiredLane, 0, 2);
+		desiredLane = Mathf.Clamp(desiredLane, 0, 2);
 	}
-	//private void MoveLeft(bool goingRight)
-	//{
-	//	SlideSFX.Play();
 
- //       desiredLane += (goingRight) ? 1 : -1;
-       
-	//	desiredLane = Mathf.Clamp(desiredLane, 0, 2);
-	//}
 
 
 	private void FixedUpdate()
