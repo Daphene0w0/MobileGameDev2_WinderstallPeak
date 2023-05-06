@@ -68,8 +68,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 5320165075835079635, guid: a53130120588231468e3a5ba54024ec7,
     type: 3}
-  speed: 45
-  laneSpeed: 5
+  speed: 50
+  laneSpeed: 15
   minSwipeDistance: 0.25
   jumpForce: 7
   Gravity: -9.81

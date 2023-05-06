@@ -102,7 +102,7 @@ MonoBehaviour:
   explosion: {fileID: 5320165075835079635, guid: e65af90b20616094dbf364f6d205867e,
     type: 3}
   speed: 25
-  laneSpeed: 5
+  laneSpeed: 10
   minSwipeDistance: 0.25
   jumpForce: 7
   Gravity: -9.81

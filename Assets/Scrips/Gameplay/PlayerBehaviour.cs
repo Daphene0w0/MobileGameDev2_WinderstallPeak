@@ -8,7 +8,6 @@ using TMPro;
 public class PlayerBehaviour : MonoBehaviour
 {
 	public GameObject explosion;
-	//public float waitTime = 2f;
 
 	//For Movement
 	private CharacterController controller;
@@ -82,32 +81,32 @@ public class PlayerBehaviour : MonoBehaviour
 			}
 		}
 
-
-
 		//Calculate where we should be in future
 		Vector3 targetPosition = transform.position.z * Vector3.forward + transform.position.y * transform.up;
 
 		if (desiredLane == 0)
 		{
 			targetPosition += Vector3.left * Lane_Distance;
+			//desiredLane = 1;
 		}
 		else if (desiredLane == 2)
 		{
 			targetPosition += Vector3.right * Lane_Distance;
+			//desiredLane = 1;
 		}
-		transform.position = Vector3.Lerp(transform.position, targetPosition, 80* Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, 20f * Time.deltaTime); //if comment = jittery
 
-		////We Stop Here XX
+        ////We Stop Here XX
 
 
-		// To move. Without these, character won't move
-		Vector3 moveVector = Vector3.zero;
-		moveVector.x = (targetPosition - transform.position).normalized.x * speed * laneSpeed;
-		moveVector.y = -0.1f;
+        // To move. Without these, character won't move
+        Vector3 moveVector = Vector3.zero;
+        moveVector.x = (targetPosition - transform.position)./*normalized.*/x * laneSpeed /** speed *//** laneSpeed*/; // if comment = !changing lane
+        moveVector.y = -0.1f;
 		moveVector.z = speed;
 
 
-		controller.Move(moveVector * Time.deltaTime);
+		controller.Move(moveVector * Time.deltaTime); //if comment = !moving
 
 
 		//To go back down after jumping
@@ -139,8 +138,6 @@ public class PlayerBehaviour : MonoBehaviour
 				}
 			}
 		}
-
-
 	}
 
 
@@ -153,8 +150,6 @@ public class PlayerBehaviour : MonoBehaviour
 
 		desiredLane = Mathf.Clamp(desiredLane, 0, 2);
 	}
-
-
 
 	private void FixedUpdate()
 	{

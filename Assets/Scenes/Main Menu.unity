@@ -2621,7 +2621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minShopSwipeDistance: 0.25
   SnowmanDisplay: {fileID: 1492163496}
-  currentSkin: 1
+  currentSkin: 2
   shopRotateSpeed: 5
   shopRotateDistance: 120
   isUsingVanilla: 1

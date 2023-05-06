@@ -20,7 +20,7 @@ public class ShopManager : MonoBehaviour
     Quaternion secondSkin = Quaternion.Euler(0, 120, 0); // choco skin
     Quaternion thirdSkin = Quaternion.Euler(0, 240, 0); // strawberry skin
 
-    public int currentSkin;
+    public int currentSkin = 2;
 
     public float shopRotateSpeed = 10f;
 
@@ -35,9 +35,8 @@ public class ShopManager : MonoBehaviour
     private void Start()
     {
         minShopSwipeDistancePixels = minShopSwipeDistance * Screen.dpi;
-        currentSkin = 2;
-    }
 
+    }
 
     private void Update()
     {
@@ -91,6 +90,7 @@ public class ShopManager : MonoBehaviour
             default:
         
                 currentSkin = 2;
+                PlayerPrefs.SetInt("SnowmanFlavour", 1); // To set the default (vanilla) skin
                 break;
 
             case 1:
