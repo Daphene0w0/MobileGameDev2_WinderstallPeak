@@ -7,6 +7,7 @@ using TMPro;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+	//To spawn particle effects when player dies
 	public GameObject explosion;
 
 	//For Movement
@@ -96,18 +97,13 @@ public class PlayerBehaviour : MonoBehaviour
 		}
         transform.position = Vector3.Lerp(transform.position, targetPosition, 20f * Time.deltaTime); //if comment = jittery
 
-        ////We Stop Here XX
-
-
         // To move. Without these, character won't move
         Vector3 moveVector = Vector3.zero;
         moveVector.x = (targetPosition - transform.position)./*normalized.*/x * laneSpeed /** speed *//** laneSpeed*/; // if comment = !changing lane
         moveVector.y = -0.1f;
 		moveVector.z = speed;
 
-
 		controller.Move(moveVector * Time.deltaTime); //if comment = !moving
-
 
 		//To go back down after jumping
 		direction.y += Gravity * Time.deltaTime;
@@ -140,7 +136,6 @@ public class PlayerBehaviour : MonoBehaviour
 		}
 	}
 
-
 	//moving lanes function and make movements smooth
 	private void MoveRight(bool goingRight)
 	{
@@ -156,14 +151,12 @@ public class PlayerBehaviour : MonoBehaviour
 		controller.Move(direction * Time.deltaTime); //This affects the Jump mechanics
 	}
 
-
 	//jump function
 	private void Jump()
 	{
 		JumpSFX.Play();
 		direction.y = jumpForce;
 	}
-
 
 	//if player hits an obstacle what would happen
 	private void OnControllerColliderHit(ControllerColliderHit hit)
